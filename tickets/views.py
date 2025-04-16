@@ -4,10 +4,9 @@ from .models import Guest, Movie, Reservation
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import MovieSerializer, ReservationSerializer, GuestSerializer
-from rest_framework import status, filters
 from rest_framework.views import APIView
 from django.http import Http404
-from rest_framework import generics, mixins
+from rest_framework import generics, mixins, status, filters, viewsets
 
 # Create your views here.
 
@@ -151,4 +150,18 @@ class Mixins_pk(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.Destr
     def delete(self, request, pk):
         return self.destroy(request)
         
-        
+#6 generics
+#6.1 GET POST
+class Generics_list(generics.ListCreateAPIView):
+    queryset = Guest.objects.all()
+    serializer_class = GuestSerializer
+
+#6.2 GET PUT DELETE
+class Generics_pk(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Guest.objects.all()
+    serializer_class = GuestSerializer
+    
+#7 viewsets
+class ViewSets_Guest(viewsets.ModelViewSet):
+    queryset = Guest.objects.all()
+    serializer_class = GuestSerializer

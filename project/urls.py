@@ -6,6 +6,8 @@ from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register('guests', views.ViewSets_Guest)
+router.register('movies', views.ViewSets_Movie)
+router.register('reservation', views.ViewSets_Reservation)
 
 
 urlpatterns = [
@@ -30,6 +32,10 @@ urlpatterns = [
     path('rest-generics/', views.Generics_list.as_view()),
     #6.2 GET PUT DELETE from rest framework class based-view generics
     path('rest-generics/<int:pk>', views.Generics_pk.as_view()),
-    #7 GET POST PUT DELETE from rest framework class based-view generics
+    #7 GET POST PUT DELETE from rest framework class based-view viewsets
     path('rest-viewsets/', include(router.urls)),
+    #8 Find movie
+    path('rest-fbv-findmovie/', views.find_movie),
+    #9 New Reservation
+    path('fbv-newreservation/', views.new_reservation),
 ]

@@ -165,3 +165,40 @@ class Generics_pk(generics.RetrieveUpdateDestroyAPIView):
 class ViewSets_Guest(viewsets.ModelViewSet):
     queryset = Guest.objects.all()
     serializer_class = GuestSerializer
+    
+    
+class ViewSets_Movie(viewsets.ModelViewSet):
+    queryset = Movie.objects.all()
+    serializer_class = MovieSerializer
+    filter_backend = [filters.SearchFilter]
+    search_field = ['movie']
+    
+    
+class ViewSets_Reservation(viewsets.ModelViewSet):
+    queryset = Reservation.objects.all()
+    serializer_class = ReservationSerializer
+    
+#8 Find Movie
+@api_view(['GET'])
+def find_movie(request):
+    movies = Movie.objects.filter(movie = request.data['movie'])
+    serializer = MovieSerializer(movies, many = True)
+    return Response(serializer.data)
+
+#9 Create The Reservation
+@api_view(['POST'])
+def new_reservation(request):
+    movie = Movie.objects.get(movie = request.data['movie'], hall = request.data['hall'])
+
+    guest = Guest()
+    guest.name = request.data['name']
+    guest.mobile = request.data['mobile']
+    guest.save()
+
+    reservation = Reservation()
+    reservation.guest = guest
+    reservation.movie = movie
+    reservation.save()
+
+    return Response(status=status.HTTP_201_CREATED)
+    

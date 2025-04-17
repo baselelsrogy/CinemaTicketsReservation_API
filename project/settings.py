@@ -42,7 +42,14 @@ INSTALLED_APPS = [
     'rest_framework',
 ]
 
-REST_FRAMEWORK = {}
+REST_FRAMEWORK = {
+    'DEFAUT_AUTHENTICATION_CLASSES':
+        ['rest_framework.authentication.BasicAuthentication'],
+    'DEFAULT_PERMISSION_CLASSES':
+        ['rest_framework.permissions.IsAuthenticated'],
+}
+
+# AllowAny \\ IsAuthenticated \\ IsAdminuser \\ IsAuthenticatedReadOnly
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

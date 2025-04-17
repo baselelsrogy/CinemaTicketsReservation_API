@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from tickets import views
 from rest_framework.routers import DefaultRouter
+from rest_framework.authtoken.views import obtain_auth_token
 
 
 router = DefaultRouter()
@@ -38,4 +39,8 @@ urlpatterns = [
     path('rest-fbv-findmovie/', views.find_movie),
     #9 New Reservation
     path('fbv-newreservation/', views.new_reservation),
+    #10 rest auth url
+    path('api-auth', include('rest_framework.urls')),
+    #11 Token authentication
+    path('api-token-auth', obtain_auth_token),
 ]

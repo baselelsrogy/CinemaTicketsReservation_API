@@ -1,14 +1,15 @@
 from django.shortcuts import render
 from django.http.response import JsonResponse
-from .models import Guest, Movie, Reservation
+from .models import Guest, Movie, Reservation, Post
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import MovieSerializer, ReservationSerializer, GuestSerializer
+from .serializers import MovieSerializer, ReservationSerializer, GuestSerializer, PostSerializer
 from rest_framework.views import APIView
 from django.http import Http404
 from rest_framework import generics, mixins, status, filters, viewsets
 from rest_framework.authentication import BasicAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+from .permissions import IsAuthor
 
 # Create your views here.
 
@@ -207,4 +208,10 @@ def new_reservation(request):
     reservation.save()
 
     return Response(status=status.HTTP_201_CREATED)
+
+# 10 post author editor
+class Post_pk(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthor]
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
     

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 from django.db.models.signals import post_save
 from django.conf import settings
@@ -28,6 +29,11 @@ class Reservation(models.Model):
     
     guest = models.ForeignKey(Guest, related_name='reservation', on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, related_name='reservation', on_delete=models.CASCADE)
+    
+class Post(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=50)
+    body = models.TextField()
 
 
 # create automatic token when new user was register    

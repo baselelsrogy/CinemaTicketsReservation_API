@@ -43,4 +43,7 @@ urlpatterns = [
     path('api-auth', include('rest_framework.urls')),
     #11 Token authentication
     path('api-token-auth', obtain_auth_token),
+    # 12 Post pk Generics
+    path('api-generics/<int:pk>', views.Post_pk.as_view()),
+    path('api-generics/', views.Post_pk.as_view()),
 ]

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Guest, Movie, Reservation
+from .models import Guest, Movie, Reservation, Post
 
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,3 +15,8 @@ class GuestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Guest
         fields = ['pk' ,'name', 'mobile', 'reservation']
+        
+class PostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = '__all__'

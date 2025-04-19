@@ -32,8 +32,8 @@ INSTALLED_APPS = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAUT_AUTHENTICATION_CLASSES':
-        ['rest_framework.authentication.TokenAuthentication'],
+    # 'DEFAUT_AUTHENTICATION_CLASSES':
+    #     ['rest_framework.authentication.TokenAuthentication'],
     # 'DEFAULT_PERMISSION_CLASSES':
     #     ['rest_framework.permissions.IsAuthenticated'],
 }
